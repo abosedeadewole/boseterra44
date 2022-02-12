@@ -1,0 +1,20 @@
+{
+    "Id": "Policy1644538570140",
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "Stmt1644538566249",
+        "Action": [
+          "s3:GetObject",
+          "s3:PutObject"
+        ],
+        "Effect": "Allow",
+        "Resource": "${resource-name}/*",
+        "Principal": {
+          "AWS": [
+            "${iam-role-arn}"
+          ]
+        }
+      }
+    ]
+  }

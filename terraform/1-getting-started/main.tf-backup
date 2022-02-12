@@ -1,0 +1,73 @@
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "3.64.2"
+    }
+  }
+}
+
+provider "aws" {
+  profile = "default"
+  region  = "us-east-2"
+}
+
+provider "aws" {
+  profile = "default"
+  region  = "us-east-1"
+  alias = "North_Virgina"
+}
+
+
+
+locals {
+  engineer_name = "ayomide"
+  environment = "testing environment"
+}
+
+
+resource "aws_instance" "milua_server" {
+  ami = "ami-0629230e074c580f2"
+  instance_type = var.instance_type #  if you want to insert the type "t2.micro"
+
+  tags = {
+#    Name = "milua_server"
+  Name = "My-sever-${local.engineer_name}" # use of interpolation
+  environment =  local.environment
+
+  }
+}
+
+output "public_ip_addr" {
+  value = aws_instance.milua_server.public_ip
+  
+}
+
+output "private_ip_addr" {
+  value = aws_instance.milua_server.private_ip  
+}
+
+# using aws vpc module
+module "vpc" {
+  source = "terraform-aws-modules/vpc/aws"
+
+# specifying providers for vpc module
+  providers = {
+    aws = aws.North_Virgina
+  }
+
+  name = "test-terraform-vpc"
+  cidr = "10.1.0.0/16"
+
+  azs             = ["us-east-1a", "us-east-1b", "us-east-1c"]
+  private_subnets = ["10.1.1.0/24", "10.1.2.0/24", "10.1.3.0/24"]
+  public_subnets  = ["10.1.101.0/24", "10.1.102.0/24", "10.1.103.0/24"]
+
+  enable_nat_gateway = true
+  enable_vpn_gateway = true
+
+  tags = {
+    Terraform = "true"
+    Environment = "dev"
+  }
+}

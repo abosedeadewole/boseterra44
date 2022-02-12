@@ -1,0 +1,56 @@
+# Terrafrom Commands
+
+# To initialize a directory
+terraform init
+
+# To check for errors in a terraform file
+terraform fmt
+
+# to validate a terraform file
+terraform validate
+
+# to give a speculative plan 
+terraform plan
+
+# to give apply 
+terraform apply
+
+# to auto-approve 
+terraform apply -auto-approve
+
+# using variables
+
+method 1: using the -var option
+-var="instance_type=t2.micro"
+
+method 2: creating a variables file
+
+variable "instance_type" 
+{
+  description = "Type of the EC2 instance"
+  type        = string
+  default     = "t2.micro"
+}
+
+#  make the state file macth the remote instances
+terraform refresh
+
+# to pull out the outputs of state file
+terraform output 
+
+# add in main.tf
+output "public_ip_addr" 
+{
+  value = aws_instance.milua_server.public_ip  
+}
+
+# initilize a module first 
+
+# to give a destroy mode  plan 
+terraform plan -destroy 
+
+# to destory the infrastructure
+terraform destroy
+
+# logining into the sever
+ssh ec2-user@$(terraform output -raw public_ip_address) -i ~/.ssh/id_rsa

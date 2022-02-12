@@ -1,0 +1,18 @@
+{
+  "Id": "Policy1644383375233",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1644383374412",
+      "Action": "s3:*",
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::metadata-ayo/*",
+      "Principal": {
+        "AWS": [
+          "${arn}"
+        ]
+      }
+    }
+  ]
+}
+

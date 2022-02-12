@@ -1,0 +1,5 @@
+resource "aws_key_pair" "terraform_key" {
+  key_name   = "terraform-key"
+ # public_key = file ("./.ssh/terraform-key.pub")
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDXKtCCY84TXXUHiMCszGKY0rwb5FjwEoCtUM0wPltACgCaD3rJcZixkBMZPpqX34pdQyWJ6tuBtSL6aL1VGmuYStHJ9+IaiiKYA124tJ3LMdgI3Mjrp9szZhiZLQIxrgzzEG0rntD+jepa6lRri+VkiUg6kjX1ytTXTZCpHfWaXeu4J87Zoyv8IXVLNsEh7NwZ3p+meWkl3TDqYAabVj/NkdCszmkPbC+aET7p6wLreb/BRC2ZWdOimQ+LhAL/0rdgtEwlLzoBvDSTebwq4mRDY+xLtIl4vcVEG1Uj9Sx5gXI4DKvKj1vpRDGAX+aibokJdkZAFaf7Lu/OFsu9lAWOk2OfwOFMaONbcdX4O3Kks7q3IFKpbel6QNMrwSZlKjcGNzf3UWJOPMtDmFtuwZXOOMPlL4WEwQpTT4Oe9vupZgnOSYwhwkpL6YyOZ4E/0Uc/6ewfjOHup2x6Q/530SRqTloPjNtDgQP1UBvpNJnW43lOtsGabVuHzwa2xFIZ0oU= kops@ip-172-31-21-93"
+}
